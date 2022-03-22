@@ -16,6 +16,12 @@ namespace KeySafe.UserControls
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
+            foreach (string file in Settings.Default.Files)
+            {
+                this.listBox_saveFiles.Items.Add(file);
+                Console.WriteLine(file);
+            }
+            this.listBox_saveFiles.Update();
         }
 
         /// <summary>
@@ -37,6 +43,12 @@ namespace KeySafe.UserControls
             {
                 OnLoginRequest(this.textBox_pw.Text);
             }
+        }
+
+
+        private void button_AddKeySaveFile_Click(object sender, EventArgs e)
+        {
+            this.openFileDialog_OpenKeySaveFile.ShowDialog(this);
         }
     }
 }
