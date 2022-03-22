@@ -49,13 +49,13 @@ namespace KeySafe.UserControls
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(336, 287);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(719, 397);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // textBox_pw
             // 
             this.textBox_pw.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.textBox_pw.Location = new System.Drawing.Point(118, 120);
+            this.textBox_pw.Location = new System.Drawing.Point(308, 175);
             this.textBox_pw.Name = "textBox_pw";
             this.textBox_pw.PasswordChar = '*';
             this.textBox_pw.Size = new System.Drawing.Size(100, 20);
@@ -65,7 +65,7 @@ namespace KeySafe.UserControls
             // button_login
             // 
             this.button_login.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button_login.Location = new System.Drawing.Point(130, 146);
+            this.button_login.Location = new System.Drawing.Point(321, 201);
             this.button_login.Name = "button_login";
             this.button_login.Size = new System.Drawing.Size(75, 23);
             this.button_login.TabIndex = 1;
@@ -73,13 +73,13 @@ namespace KeySafe.UserControls
             this.button_login.UseVisualStyleBackColor = true;
             this.button_login.Click += new System.EventHandler(this.button_login_Click);
             // 
-            // Login
+            // LoginView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "Login";
-            this.Size = new System.Drawing.Size(336, 287);
+            this.Name = "LoginView";
+            this.Size = new System.Drawing.Size(719, 397);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

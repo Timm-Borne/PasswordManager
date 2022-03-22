@@ -32,3 +32,14 @@ D:\Entwicklung\KeySafe\KeySafe\obj\Debug\KeySafe.UserControls.TableView.resource
 D:\Entwicklung\KeySafe\KeySafe\obj\Debug\KeySafe.Form_DataEntry.resources
 D:\Entwicklung\KeySafe\KeySafe\obj\Debug\KeySafe.UserControls.LoginView.resources
 D:\Entwicklung\KeySafe\KeySafe\obj\Debug\KeySafe.FolderForm.resources
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.csproj.AssemblyReference.cache
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.csproj.SuggestedBindingRedirects.cache
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.FolderForm.resources
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.Form_DataEntry.resources
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.Properties.Resources.resources
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.UserControls.LoginView.resources
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.UserControls.TableView.resources
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.csproj.GenerateResource.cache
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.csproj.CoreCompileInputs.cache
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.exe
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\Debug\KeySafe.pdb
