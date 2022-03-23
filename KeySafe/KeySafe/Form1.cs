@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 using KeySafe.UserControls;
 
@@ -25,15 +26,30 @@ namespace KeySafe
         public Form1()
         {
             //PrefillFile();
-            //TODO let user select files or create new files
             InitializeComponent();
             this.loginView = new LoginView();
             this.loginView.OnLoginRequest += LoginView_OnLoginRequest;
+            this.loginView.OnCreatePassword += LoginView_OnCreatePassword;
             this.loginView.Dock = DockStyle.Fill;
             this.Controls.Add(loginView);
 
             this.tableView = new TableView();
             this.tableView.OnKeySafeFileChanged += TableView_OnKeySafeFileChanged;
+        }
+
+        private void LoginView_OnCreatePassword(string filename)
+        {
+            CreatePassword createPassword = new CreatePassword();
+            DialogResult dialogResult = createPassword.ShowDialog(this);
+            if(dialogResult == DialogResult.OK)
+            {
+                FileHandling.CreateFile(filename, createPassword.Password);
+            }
+            else
+            {
+                this.loginView.CancelLogin();
+            }
+            createPassword.Dispose();
         }
 
         private void TableView_OnKeySafeFileChanged()
@@ -68,20 +84,43 @@ namespace KeySafe
             this.file = null;
         }
 
-        private void LoginView_OnLoginRequest(string password)
+        private void LoginView_OnLoginRequest(string filename, string password)
         {
             try
             {
-                //TODO if file did not exist ask about filename and password encrypt
+                DialogResult dialogResult = DialogResult.None;
+                if (!File.Exists(filename))
+                {
+                    string text = $"The selected file did not exist. Do you want to create a new file under:\n{filename}";
+                    dialogResult = MessageBox.Show(text, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if(dialogResult == DialogResult.Yes)
+                    {
+                        try
+                        {
+                            File.Create(filename).Close();
+                            LoginView_OnCreatePassword(filename);
+                            return;
+                        }
+                        catch (Exception)
+                        {
+                            throw new FileNotFoundException("File could not be created.");
+                        }
+                    }
+                    else throw new FileNotFoundException();
+                }
+
+                
+
+                this.path = filename;
                 this.password = password;
                 this.file = FileHandling.LoadFile(this.path, this.password);
-                Console.WriteLine("Access granted!");
 
                 this.Controls.Remove(this.loginView);
                 this.loginView.Dispose();
 
                 this.tableView.Init(this.file);
                 this.Controls.Add(this.tableView);
+                
             }
             catch (System.Security.Cryptography.CryptographicException)
             {
@@ -95,8 +134,7 @@ namespace KeySafe
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Access not granted!");
-                Console.WriteLine(ex);
+                MessageBox.Show(ex.Message);
             }
         }
     }

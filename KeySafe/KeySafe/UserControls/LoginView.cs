@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace KeySafe.UserControls
 {
@@ -16,39 +17,136 @@ namespace KeySafe.UserControls
         {
             InitializeComponent();
             this.Dock = DockStyle.Fill;
-            foreach (string file in Settings.Default.Files)
-            {
-                this.listBox_saveFiles.Items.Add(file);
-                Console.WriteLine(file);
-            }
-            this.listBox_saveFiles.Update();
+            FillFileHistory();
         }
 
         /// <summary>
         /// Trigger the Loginrequest event if the user want to login.
         /// </summary>
         /// <param name="password">The password that the user has entered in the textfield.</param>
-        public delegate void OnLoginRequestDelegate(string password);
+        public delegate void OnLoginRequestDelegate(string filePath, string password);
         public event OnLoginRequestDelegate OnLoginRequest;
 
         private void button_login_Click(object sender, EventArgs e)
         {
-            OnLoginRequest(this.textBox_pw.Text);
+            OnLoginRequest(this.listBox_saveFiles.SelectedItem.ToString(), this.textBox_pw.Text);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBox_pw_KeyUp(object sender, KeyEventArgs e)
         {
             //If the user hit enter the loginrequest will also be triggered
             if(e.KeyCode == Keys.Enter)
             {
-                OnLoginRequest(this.textBox_pw.Text);
+                OnLoginRequest(this.listBox_saveFiles.SelectedItem.ToString(), this.textBox_pw.Text);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button_AddExisting_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.openFileDialog_OpenKeySaveFile.ShowDialog(this);
+            if(result == DialogResult.OK)
+            {
+                Console.WriteLine(this.openFileDialog_OpenKeySaveFile.FileName);
+            }
+        }
+        private void button_CreateNew_Click(object sender, EventArgs e)
+        {
+            DialogResult result = this.saveFileDialog_CreateNew.ShowDialog(this);
+            if (result == DialogResult.OK)
+            {
+                if (!this.saveFileDialog_CreateNew.CheckFileExists)
+                {
+                    try
+                    {
+                        File.Create(this.saveFileDialog_CreateNew.FileName).Close();
+                        Settings.Default.Files.Add(this.saveFileDialog_CreateNew.FileName);
+                        Settings.Default.Save();
+                        FillFileHistory();
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
             }
         }
 
-
-        private void button_AddKeySaveFile_Click(object sender, EventArgs e)
+        private void CheckFiles()
         {
-            this.openFileDialog_OpenKeySaveFile.ShowDialog(this);
+            string[] files = new string[Settings.Default.Files.Count];
+
+            Settings.Default.Files.CopyTo(files, 0);
+
+            foreach (string file in files)
+            {
+                if (!File.Exists(file))
+                {
+                    Settings.Default.Files.Remove(file);
+                }
+            }
+        }
+
+        private void FillFileHistory()
+        {
+            CheckFiles();
+            this.listBox_saveFiles.Items.Clear();
+            foreach (string file in Settings.Default.Files)
+            {
+                this.listBox_saveFiles.Items.Add(file);
+            }
+        }
+
+        public delegate void OnCreatePasswordDelegate(string filename);
+        public event OnCreatePasswordDelegate OnCreatePassword;
+
+        private void listBox_saveFiles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (this.listBox_saveFiles.SelectedIndex >= 0)
+                {
+                    this.button_login.Enabled = true;
+                    if (String.IsNullOrEmpty(File.ReadAllText(this.listBox_saveFiles.SelectedItem.ToString())))
+                    {
+                        string text = "The file did not been used before. Please set a password to encrypt the file.";
+                        DialogResult dialogresult = MessageBox.Show(this, text, "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        if (dialogresult == DialogResult.OK)
+                        {
+                            OnCreatePassword(this.listBox_saveFiles.SelectedItem.ToString());
+                        }
+                        else
+                        {
+                            this.listBox_saveFiles.SelectedIndex = -1;
+                        }
+                    }
+                }
+                else
+                {
+                    this.button_login.Enabled = false;
+                }
+            }
+            catch (FileNotFoundException)
+            {
+                OnLoginRequest(this.listBox_saveFiles.SelectedItem.ToString(), this.textBox_pw.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message);
+            }
+        }
+
+        public void CancelLogin()
+        {
+            this.listBox_saveFiles.SelectedIndex = -1;
         }
     }
 }

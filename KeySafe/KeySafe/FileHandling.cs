@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using SymetricEncryption;
 using System.Text.Json;
+using System.Windows.Forms;
 
 namespace KeySafe
 {
@@ -17,7 +15,6 @@ namespace KeySafe
             {
                 if (!File.Exists(path))
                 {
-                    Console.WriteLine("New File will be created!");
                     CreateFile(path, password);
                 }
                 
@@ -25,7 +22,22 @@ namespace KeySafe
 
                 text = Decrypt.Text(text, password);
 
-                return JsonSerializer.Deserialize<KeySafeFile>(text);
+                KeySafeFile keySafeFile = null;
+                try
+                {
+                    keySafeFile = JsonSerializer.Deserialize<KeySafeFile>(text);
+                }
+                catch (JsonException)
+                {
+                    CreateFile(path, password);
+                    return LoadFile(path, password);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
+                return keySafeFile;
             }
             catch(Exception ex)
             {
@@ -51,7 +63,7 @@ namespace KeySafe
             }
         }
 
-        private static void CreateFile(string path, string password)
+        public static void CreateFile(string path, string password)
         {
             KeySafeFile ksf = new KeySafeFile();
             ksf.Folder = new List<Folder>();

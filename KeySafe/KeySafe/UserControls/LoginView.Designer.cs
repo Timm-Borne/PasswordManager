@@ -33,11 +33,15 @@ namespace KeySafe.UserControls
             this.textBox_pw = new System.Windows.Forms.TextBox();
             this.button_login = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.listBox_saveFiles = new System.Windows.Forms.ListBox();
-            this.button_AddKeySaveFile = new System.Windows.Forms.Button();
+            this.button_AddExisting = new System.Windows.Forms.Button();
+            this.button_CreateKeySaveFile = new System.Windows.Forms.Button();
             this.openFileDialog_OpenKeySaveFile = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialog_CreateNew = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -71,6 +75,7 @@ namespace KeySafe.UserControls
             // button_login
             // 
             this.button_login.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button_login.Enabled = false;
             this.button_login.Location = new System.Drawing.Point(321, 201);
             this.button_login.Name = "button_login";
             this.button_login.Size = new System.Drawing.Size(75, 23);
@@ -81,8 +86,7 @@ namespace KeySafe.UserControls
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.listBox_saveFiles);
-            this.panel1.Controls.Add(this.button_AddKeySaveFile);
+            this.panel1.Controls.Add(this.tableLayoutPanel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
@@ -90,33 +94,69 @@ namespace KeySafe.UserControls
             this.panel1.Size = new System.Drawing.Size(233, 391);
             this.panel1.TabIndex = 2;
             // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Controls.Add(this.listBox_saveFiles, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.button_AddExisting, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.button_CreateKeySaveFile, 1, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(233, 391);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
             // listBox_saveFiles
             // 
             this.listBox_saveFiles.BackColor = System.Drawing.SystemColors.Control;
-            this.listBox_saveFiles.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.SetColumnSpan(this.listBox_saveFiles, 2);
             this.listBox_saveFiles.FormattingEnabled = true;
-            this.listBox_saveFiles.Location = new System.Drawing.Point(0, 0);
+            this.listBox_saveFiles.Location = new System.Drawing.Point(3, 3);
             this.listBox_saveFiles.Name = "listBox_saveFiles";
-            this.listBox_saveFiles.Size = new System.Drawing.Size(233, 368);
+            this.listBox_saveFiles.Size = new System.Drawing.Size(227, 355);
             this.listBox_saveFiles.TabIndex = 1;
+            this.listBox_saveFiles.SelectedIndexChanged += new System.EventHandler(this.listBox_saveFiles_SelectedIndexChanged);
             // 
-            // button_AddKeySaveFile
+            // button_AddExisting
             // 
-            this.button_AddKeySaveFile.AutoSize = true;
-            this.button_AddKeySaveFile.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.button_AddKeySaveFile.Location = new System.Drawing.Point(0, 368);
-            this.button_AddKeySaveFile.Name = "button_AddKeySaveFile";
-            this.button_AddKeySaveFile.Size = new System.Drawing.Size(233, 23);
-            this.button_AddKeySaveFile.TabIndex = 0;
-            this.button_AddKeySaveFile.Text = "Add .ksf file";
-            this.button_AddKeySaveFile.UseVisualStyleBackColor = true;
-            this.button_AddKeySaveFile.Click += new System.EventHandler(this.button_AddKeySaveFile_Click);
+            this.button_AddExisting.AutoSize = true;
+            this.button_AddExisting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button_AddExisting.Location = new System.Drawing.Point(3, 365);
+            this.button_AddExisting.Name = "button_AddExisting";
+            this.button_AddExisting.Size = new System.Drawing.Size(110, 23);
+            this.button_AddExisting.TabIndex = 0;
+            this.button_AddExisting.Text = "Add existing";
+            this.button_AddExisting.UseVisualStyleBackColor = true;
+            this.button_AddExisting.Click += new System.EventHandler(this.button_AddExisting_Click);
+            // 
+            // button_CreateKeySaveFile
+            // 
+            this.button_CreateKeySaveFile.AutoSize = true;
+            this.button_CreateKeySaveFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button_CreateKeySaveFile.Location = new System.Drawing.Point(119, 365);
+            this.button_CreateKeySaveFile.Name = "button_CreateKeySaveFile";
+            this.button_CreateKeySaveFile.Size = new System.Drawing.Size(111, 23);
+            this.button_CreateKeySaveFile.TabIndex = 2;
+            this.button_CreateKeySaveFile.Text = "Create new";
+            this.button_CreateKeySaveFile.UseVisualStyleBackColor = true;
+            this.button_CreateKeySaveFile.Click += new System.EventHandler(this.button_CreateNew_Click);
             // 
             // openFileDialog_OpenKeySaveFile
             // 
             this.openFileDialog_OpenKeySaveFile.DefaultExt = "ksf";
-            this.openFileDialog_OpenKeySaveFile.FileName = "openFileDialog1";
             this.openFileDialog_OpenKeySaveFile.Filter = "\"Keysavefiles (*.ksf)|*.ksf\"";
+            // 
+            // saveFileDialog_CreateNew
+            // 
+            this.saveFileDialog_CreateNew.CreatePrompt = true;
+            this.saveFileDialog_CreateNew.DefaultExt = "ksf";
+            this.saveFileDialog_CreateNew.Filter = "\"Keysavefiles (*.ksf)|*.ksf\"";
+            this.saveFileDialog_CreateNew.RestoreDirectory = true;
             // 
             // LoginView
             // 
@@ -128,7 +168,8 @@ namespace KeySafe.UserControls
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -140,7 +181,10 @@ namespace KeySafe.UserControls
         private System.Windows.Forms.Button button_login;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ListBox listBox_saveFiles;
-        private System.Windows.Forms.Button button_AddKeySaveFile;
+        private System.Windows.Forms.Button button_AddExisting;
         private System.Windows.Forms.OpenFileDialog openFileDialog_OpenKeySaveFile;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Button button_CreateKeySaveFile;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog_CreateNew;
     }
 }
