@@ -65,3 +65,4 @@ C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x86\Release\KeySafe.
 C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x86\Release\KeySafe.csproj.CopyComplete
 C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x86\Release\KeySafe.exe
 C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x86\Release\KeySafe.pdb
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x86\Release\KeySafe.CreatePassword.resources
