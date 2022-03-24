@@ -92,7 +92,7 @@ namespace KeySafe.UserControls
             this.dataGridView_dataTable.Location = new System.Drawing.Point(0, 0);
             this.dataGridView_dataTable.Name = "dataGridView_dataTable";
             this.dataGridView_dataTable.ReadOnly = true;
-            this.dataGridView_dataTable.Size = new System.Drawing.Size(776, 374);
+            this.dataGridView_dataTable.Size = new System.Drawing.Size(737, 374);
             this.dataGridView_dataTable.TabIndex = 0;
             this.dataGridView_dataTable.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseDown);
             this.dataGridView_dataTable.CellMouseUp += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_CellMouseUp);
@@ -150,7 +150,7 @@ namespace KeySafe.UserControls
             this.treeView_folderExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView_folderExplorer.Location = new System.Drawing.Point(0, 0);
             this.treeView_folderExplorer.Name = "treeView_folderExplorer";
-            this.treeView_folderExplorer.Size = new System.Drawing.Size(92, 374);
+            this.treeView_folderExplorer.Size = new System.Drawing.Size(131, 374);
             this.treeView_folderExplorer.TabIndex = 1;
             this.treeView_folderExplorer.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
@@ -169,7 +169,7 @@ namespace KeySafe.UserControls
             // 
             this.splitContainer_centerContent.Panel2.Controls.Add(this.dataGridView_dataTable);
             this.splitContainer_centerContent.Size = new System.Drawing.Size(872, 374);
-            this.splitContainer_centerContent.SplitterDistance = 92;
+            this.splitContainer_centerContent.SplitterDistance = 131;
             this.splitContainer_centerContent.TabIndex = 2;
             // 
             // panel_topMenuBar

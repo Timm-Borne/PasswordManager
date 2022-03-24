@@ -71,10 +71,11 @@ namespace KeySafe.UserControls
             // textBox_pw
             // 
             this.textBox_pw.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.textBox_pw.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_pw.Location = new System.Drawing.Point(3, 3);
             this.textBox_pw.Name = "textBox_pw";
             this.textBox_pw.PasswordChar = '*';
-            this.textBox_pw.Size = new System.Drawing.Size(158, 20);
+            this.textBox_pw.Size = new System.Drawing.Size(158, 24);
             this.textBox_pw.TabIndex = 0;
             this.textBox_pw.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox_pw_KeyUp);
             // 
@@ -172,9 +173,9 @@ namespace KeySafe.UserControls
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.tableLayoutPanel3);
-            this.panel2.Location = new System.Drawing.Point(262, 169);
+            this.panel2.Location = new System.Drawing.Point(262, 165);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(193, 26);
+            this.panel2.Size = new System.Drawing.Size(193, 30);
             this.panel2.TabIndex = 3;
             // 
             // tableLayoutPanel3
@@ -190,7 +191,7 @@ namespace KeySafe.UserControls
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(193, 26);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(193, 30);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // pictureBox1
@@ -198,7 +199,7 @@ namespace KeySafe.UserControls
             this.pictureBox1.Image = global::KeySafe.Properties.Resources._1557;
             this.pictureBox1.Location = new System.Drawing.Point(167, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(23, 20);
+            this.pictureBox1.Size = new System.Drawing.Size(23, 24);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;

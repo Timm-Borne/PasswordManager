@@ -173,5 +173,10 @@ namespace KeySafe
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            TableView_OnLogoutRequest();
+        }
     }
 }

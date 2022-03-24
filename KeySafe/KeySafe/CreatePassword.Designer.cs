@@ -58,7 +58,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(307, 130);
+            this.panel1.Size = new System.Drawing.Size(324, 132);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -81,7 +81,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(307, 130);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(324, 132);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel2
@@ -89,7 +89,7 @@
             this.panel2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel1.SetColumnSpan(this.panel2, 2);
             this.panel2.Controls.Add(this.tableLayoutPanel2);
-            this.panel2.Location = new System.Drawing.Point(53, 16);
+            this.panel2.Location = new System.Drawing.Point(62, 16);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 31);
             this.panel2.TabIndex = 4;
@@ -112,10 +112,11 @@
             // textBox_Password
             // 
             this.textBox_Password.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox_Password.Location = new System.Drawing.Point(3, 5);
+            this.textBox_Password.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_Password.Location = new System.Drawing.Point(3, 3);
             this.textBox_Password.Name = "textBox_Password";
             this.textBox_Password.PasswordChar = '*';
-            this.textBox_Password.Size = new System.Drawing.Size(163, 20);
+            this.textBox_Password.Size = new System.Drawing.Size(163, 24);
             this.textBox_Password.TabIndex = 0;
             // 
             // pictureBox_ShowPassword
@@ -134,7 +135,7 @@
             // button_Okay
             // 
             this.button_Okay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button_Okay.Location = new System.Drawing.Point(75, 103);
+            this.button_Okay.Location = new System.Drawing.Point(84, 103);
             this.button_Okay.Name = "button_Okay";
             this.button_Okay.Size = new System.Drawing.Size(75, 23);
             this.button_Okay.TabIndex = 2;
@@ -144,7 +145,7 @@
             // 
             // button_Cancel
             // 
-            this.button_Cancel.Location = new System.Drawing.Point(156, 103);
+            this.button_Cancel.Location = new System.Drawing.Point(165, 103);
             this.button_Cancel.Name = "button_Cancel";
             this.button_Cancel.Size = new System.Drawing.Size(75, 23);
             this.button_Cancel.TabIndex = 3;
@@ -157,7 +158,7 @@
             this.panel3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel1.SetColumnSpan(this.panel3, 2);
             this.panel3.Controls.Add(this.tableLayoutPanel3);
-            this.panel3.Location = new System.Drawing.Point(53, 66);
+            this.panel3.Location = new System.Drawing.Point(62, 66);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(200, 31);
             this.panel3.TabIndex = 5;
@@ -180,10 +181,11 @@
             // textBoxRepeatPassword
             // 
             this.textBoxRepeatPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBoxRepeatPassword.Location = new System.Drawing.Point(3, 5);
+            this.textBoxRepeatPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxRepeatPassword.Location = new System.Drawing.Point(3, 3);
             this.textBoxRepeatPassword.Name = "textBoxRepeatPassword";
             this.textBoxRepeatPassword.PasswordChar = '*';
-            this.textBoxRepeatPassword.Size = new System.Drawing.Size(163, 20);
+            this.textBoxRepeatPassword.Size = new System.Drawing.Size(163, 24);
             this.textBoxRepeatPassword.TabIndex = 0;
             // 
             // pictureBox_ShowRepeatPassword
@@ -204,7 +206,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label2.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label2, 2);
-            this.label2.Location = new System.Drawing.Point(127, 0);
+            this.label2.Location = new System.Drawing.Point(135, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 7;
@@ -215,7 +217,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.label1, 2);
-            this.label1.Location = new System.Drawing.Point(108, 50);
+            this.label1.Location = new System.Drawing.Point(117, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 13);
             this.label1.TabIndex = 6;
@@ -225,9 +227,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 130);
+            this.ClientSize = new System.Drawing.Size(324, 132);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "CreatePassword";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CreatePassword";

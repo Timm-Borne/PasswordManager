@@ -60,9 +60,10 @@ namespace KeySafe
             // 
             this.textBox_folderName.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tableLayoutPanel1.SetColumnSpan(this.textBox_folderName, 2);
-            this.textBox_folderName.Location = new System.Drawing.Point(44, 31);
+            this.textBox_folderName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox_folderName.Location = new System.Drawing.Point(44, 27);
             this.textBox_folderName.Name = "textBox_folderName";
-            this.textBox_folderName.Size = new System.Drawing.Size(153, 20);
+            this.textBox_folderName.Size = new System.Drawing.Size(153, 24);
             this.textBox_folderName.TabIndex = 0;
             // 
             // button_cancel
@@ -86,7 +87,7 @@ namespace KeySafe
             this.button_okay.UseVisualStyleBackColor = true;
             this.button_okay.Click += new System.EventHandler(this.button_okay_Click);
             // 
-            // AddFolderForm
+            // FolderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -94,7 +95,7 @@ namespace KeySafe
             this.ClientSize = new System.Drawing.Size(242, 109);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "AddFolderForm";
+            this.Name = "FolderForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AddFolderForm";
             this.tableLayoutPanel1.ResumeLayout(false);

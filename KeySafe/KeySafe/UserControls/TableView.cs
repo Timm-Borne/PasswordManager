@@ -192,11 +192,15 @@ namespace KeySafe.UserControls
         /// <param name="e"></param>
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Folder selectedFolder = GetFolderByName(this.treeView_folderExplorer.SelectedNode.Text);
-            Dataentry selectedEntry = GetDataentryFromGuid(this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Id.Name.ToString()].Index].Value.ToString());
-            selectedFolder.DataEntries.Remove(selectedEntry);
-            RefreshTable();
-            OnKeySafeFileChanged();
+            DialogResult dialogResult = MessageBox.Show(this, "Are you sure to delete this entry?\n It can't be resored.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (dialogResult == DialogResult.Yes)
+            {
+                Folder selectedFolder = GetFolderByName(this.treeView_folderExplorer.SelectedNode.Text);
+                Dataentry selectedEntry = GetDataentryFromGuid(this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Id.Name.ToString()].Index].Value.ToString());
+                selectedFolder.DataEntries.Remove(selectedEntry);
+                RefreshTable();
+                OnKeySafeFileChanged();
+            }
         }
 
         /// <summary>
@@ -294,6 +298,13 @@ namespace KeySafe.UserControls
             //if the button is right mousebutton show the context menu
             if (e.Button == MouseButtons.Right)
             {
+                this.contextMenuStrip_node.Items[2].Enabled = true;
+                this.contextMenuStrip_node.Items[3].Enabled = true;
+                if (e.Node.Text.Equals("Default"))
+                {
+                    this.contextMenuStrip_node.Items[2].Enabled = false;
+                    this.contextMenuStrip_node.Items[3].Enabled = false;
+                }
                 this.contextMenuStrip_node.Show(this.treeView_folderExplorer, e.Location);
             }
             else
@@ -442,6 +453,7 @@ namespace KeySafe.UserControls
             {
                 Folder parentFolder = GetFolderByName(createDataEntry.ParentFolder);
                 Dataentry entry = createDataEntry.Entry;
+                entry.Guid = Guid.NewGuid().ToString();
                 parentFolder.DataEntries.Add(entry);
                 OnKeySafeFileChanged();
                 //if the folder name is same as selected and showen folder the tabel will refresh

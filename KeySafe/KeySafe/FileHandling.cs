@@ -69,7 +69,7 @@ namespace KeySafe
             ksf.Folder = new List<Folder>();
             
             Folder folder = new Folder();
-            folder.Name = "Dafault";
+            folder.Name = "Default";
 
             folder.DataEntries = new List<Dataentry>();
 
