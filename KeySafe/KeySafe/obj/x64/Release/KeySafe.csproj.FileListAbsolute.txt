@@ -66,3 +66,4 @@ C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x64\Release\KeySafe.
 C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x64\Release\KeySafe.exe
 C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x64\Release\KeySafe.pdb
 C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x64\Release\KeySafe.CreatePassword.resources
+C:\Users\Timm\Documents\PasswordManager\KeySafe\KeySafe\obj\x64\Release\KeySafe.Form1.resources
