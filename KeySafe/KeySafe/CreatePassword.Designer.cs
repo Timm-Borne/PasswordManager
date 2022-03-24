@@ -114,6 +114,7 @@
             this.textBox_Password.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBox_Password.Location = new System.Drawing.Point(3, 5);
             this.textBox_Password.Name = "textBox_Password";
+            this.textBox_Password.PasswordChar = '*';
             this.textBox_Password.Size = new System.Drawing.Size(163, 20);
             this.textBox_Password.TabIndex = 0;
             // 
@@ -127,6 +128,8 @@
             this.pictureBox_ShowPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_ShowPassword.TabIndex = 1;
             this.pictureBox_ShowPassword.TabStop = false;
+            this.pictureBox_ShowPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ShowPassword_MouseDown);
+            this.pictureBox_ShowPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ShowPassword_MouseUp);
             // 
             // button_Okay
             // 
@@ -179,6 +182,7 @@
             this.textBoxRepeatPassword.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.textBoxRepeatPassword.Location = new System.Drawing.Point(3, 5);
             this.textBoxRepeatPassword.Name = "textBoxRepeatPassword";
+            this.textBoxRepeatPassword.PasswordChar = '*';
             this.textBoxRepeatPassword.Size = new System.Drawing.Size(163, 20);
             this.textBoxRepeatPassword.TabIndex = 0;
             // 
@@ -192,6 +196,8 @@
             this.pictureBox_ShowRepeatPassword.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox_ShowRepeatPassword.TabIndex = 1;
             this.pictureBox_ShowRepeatPassword.TabStop = false;
+            this.pictureBox_ShowRepeatPassword.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ShowRepeatPassword_MouseDown);
+            this.pictureBox_ShowRepeatPassword.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ShowRepeatPassword_MouseUp);
             // 
             // label2
             // 

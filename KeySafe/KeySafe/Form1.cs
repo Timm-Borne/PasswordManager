@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 using KeySafe.UserControls;
+using System.Threading;
 
 ///TODO: If the password should be changed the user need to enter the old password and the new password. 
 ///The file will be decrypted with the old password and encrypted with the new password. Just open the file and close the file. It dont need to be changed anything else.
@@ -22,6 +23,10 @@ namespace KeySafe
 
         private string path = String.Empty;
         private string password = String.Empty;
+
+
+        Thread counterThread = null;
+        private int secondsToWait = 30;
 
         public Form1()
         {
@@ -145,8 +150,6 @@ namespace KeySafe
                     else throw new FileNotFoundException();
                 }
 
-                
-
                 this.path = filename;
                 this.password = password;
                 this.file = FileHandling.LoadFile(this.path, this.password);
@@ -156,6 +159,7 @@ namespace KeySafe
             }
             catch (System.Security.Cryptography.CryptographicException)
             {
+                
                 string message = $"Wrong password!";
                 DialogResult dr = MessageBox.Show(this, message, "Error", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
 

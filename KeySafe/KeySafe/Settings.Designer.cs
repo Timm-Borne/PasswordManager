@@ -36,5 +36,29 @@ namespace KeySafe {
                 this["Files"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Logintry {
+            get {
+                return ((int)(this["Logintry"]));
+            }
+            set {
+                this["Logintry"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Seconds {
+            get {
+                return ((int)(this["Seconds"]));
+            }
+            set {
+                this["Seconds"] = value;
+            }
+        }
     }
 }

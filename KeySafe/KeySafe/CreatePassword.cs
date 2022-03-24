@@ -59,5 +59,25 @@ namespace KeySafe
             this.DialogResult = DialogResult.Cancel;
             this.Close();
         }
+
+        private void pictureBox_ShowPassword_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.textBox_Password.PasswordChar = '\0';
+        }
+
+        private void pictureBox_ShowPassword_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.textBox_Password.PasswordChar = '*';
+        }
+
+        private void pictureBox_ShowRepeatPassword_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.textBoxRepeatPassword.PasswordChar = '\0';
+        }
+
+        private void pictureBox_ShowRepeatPassword_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.textBoxRepeatPassword.PasswordChar = '*';
+        }
     }
 }

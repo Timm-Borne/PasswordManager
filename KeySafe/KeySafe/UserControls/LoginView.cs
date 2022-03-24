@@ -13,6 +13,9 @@ namespace KeySafe.UserControls
 {
     public partial class LoginView : UserControl
     {
+
+        private int _seconds = 0;
+        
         public LoginView()
         {
             InitializeComponent();
@@ -43,7 +46,10 @@ namespace KeySafe.UserControls
             //If the user hit enter the loginrequest will also be triggered
             if(e.KeyCode == Keys.Enter)
             {
-                OnLoginRequest(this.listBox_saveFiles.SelectedItem.ToString(), this.textBox_pw.Text);
+                if (this.button_login.Enabled)
+                {
+                    OnLoginRequest(this.listBox_saveFiles.SelectedItem.ToString(), this.textBox_pw.Text);
+                }
             }
         }
         /// <summary>
@@ -56,7 +62,9 @@ namespace KeySafe.UserControls
             DialogResult result = this.openFileDialog_OpenKeySaveFile.ShowDialog(this);
             if(result == DialogResult.OK)
             {
-                Console.WriteLine(this.openFileDialog_OpenKeySaveFile.FileName);
+                Settings.Default.Files.Add(this.openFileDialog_OpenKeySaveFile.FileName);
+                Settings.Default.Save();
+                FillFileHistory();
             }
         }
 
@@ -135,7 +143,7 @@ namespace KeySafe.UserControls
                     if (String.IsNullOrEmpty(File.ReadAllText(this.listBox_saveFiles.SelectedItem.ToString())))
                     {
                         string text = "The file did not been used before. Please set a password to encrypt the file.";
-                        DialogResult dialogresult = MessageBox.Show(this, text, "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                        DialogResult dialogresult = MessageBox.Show(text, "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
                         if (dialogresult == DialogResult.OK)
                         {
                             OnCreatePassword(this.listBox_saveFiles.SelectedItem.ToString());
@@ -167,6 +175,16 @@ namespace KeySafe.UserControls
         public void CancelLogin()
         {
             this.listBox_saveFiles.SelectedIndex = -1;
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.textBox_pw.PasswordChar = '\0';
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.textBox_pw.PasswordChar = '*';
         }
     }
 }
