@@ -23,7 +23,8 @@ namespace KeySafe.UserControls
         /// <summary>
         /// Trigger the Loginrequest event if the user want to login.
         /// </summary>
-        /// <param name="password">The password that the user has entered in the textfield.</param>
+        /// <param name="filePath">Path of the file to decrypt.</param>
+        /// <param name="password">Password that the user has entered in the textfield.</param>
         public delegate void OnLoginRequestDelegate(string filePath, string password);
         public event OnLoginRequestDelegate OnLoginRequest;
 
@@ -58,6 +59,12 @@ namespace KeySafe.UserControls
                 Console.WriteLine(this.openFileDialog_OpenKeySaveFile.FileName);
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_CreateNew_Click(object sender, EventArgs e)
         {
             DialogResult result = this.saveFileDialog_CreateNew.ShowDialog(this);
@@ -80,6 +87,9 @@ namespace KeySafe.UserControls
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void CheckFiles()
         {
             string[] files = new string[Settings.Default.Files.Count];
@@ -95,6 +105,9 @@ namespace KeySafe.UserControls
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void FillFileHistory()
         {
             CheckFiles();
@@ -105,6 +118,10 @@ namespace KeySafe.UserControls
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filename"></param>
         public delegate void OnCreatePasswordDelegate(string filename);
         public event OnCreatePasswordDelegate OnCreatePassword;
 
@@ -144,6 +161,9 @@ namespace KeySafe.UserControls
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void CancelLogin()
         {
             this.listBox_saveFiles.SelectedIndex = -1;

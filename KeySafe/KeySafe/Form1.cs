@@ -20,21 +20,57 @@ namespace KeySafe
         LoginView loginView = null;
         TableView tableView = null;
 
-        private string path = "save.ksf";
+        private string path = String.Empty;
         private string password = String.Empty;
 
         public Form1()
         {
-            //PrefillFile();
             InitializeComponent();
+            ShowLoginView();
+        }
+
+        private void TableView_OnLogoutRequest()
+        {
+            ShowLoginView();
+        }
+
+        private void ShowTableView()
+        {
+            if (this.loginView != null)
+            {
+                this.loginView.OnLoginRequest -= LoginView_OnLoginRequest;
+                this.loginView.OnCreatePassword -= LoginView_OnCreatePassword;
+                this.Controls.Remove(this.loginView);
+                this.loginView.Dispose();
+                this.loginView = null;
+            }
+
+            this.tableView = new TableView();
+            this.tableView.OnKeySafeFileChanged += TableView_OnKeySafeFileChanged;
+            this.tableView.OnLogoutRequest += TableView_OnLogoutRequest;
+            this.tableView.Init(this.file);
+            this.Controls.Add(this.tableView);
+        }
+
+        private void ShowLoginView()
+        {
+            if (tableView != null)
+            {
+                this.tableView.OnKeySafeFileChanged -= TableView_OnKeySafeFileChanged;
+                this.tableView.OnLogoutRequest -= TableView_OnLogoutRequest;
+                this.Controls.Remove(this.tableView);
+                this.tableView.Dispose();
+                this.tableView = null;
+                this.password = String.Empty;
+                this.path = String.Empty;
+                this.file = null;
+            }
+
             this.loginView = new LoginView();
             this.loginView.OnLoginRequest += LoginView_OnLoginRequest;
             this.loginView.OnCreatePassword += LoginView_OnCreatePassword;
             this.loginView.Dock = DockStyle.Fill;
             this.Controls.Add(loginView);
-
-            this.tableView = new TableView();
-            this.tableView.OnKeySafeFileChanged += TableView_OnKeySafeFileChanged;
         }
 
         private void LoginView_OnCreatePassword(string filename)
@@ -115,11 +151,7 @@ namespace KeySafe
                 this.password = password;
                 this.file = FileHandling.LoadFile(this.path, this.password);
 
-                this.Controls.Remove(this.loginView);
-                this.loginView.Dispose();
-
-                this.tableView.Init(this.file);
-                this.Controls.Add(this.tableView);
+                ShowTableView();
                 
             }
             catch (System.Security.Cryptography.CryptographicException)

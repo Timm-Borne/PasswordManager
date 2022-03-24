@@ -81,16 +81,16 @@ namespace KeySafe.UserControls
         public void FillTable()
         {
             //Iterate through every dataentry in the selected folder
-            foreach (Dataentry dataentry in GetFolderByName(this.treeView1.SelectedNode.Text).DataEntries)
+            foreach (Dataentry dataentry in GetFolderByName(this.treeView_folderExplorer.SelectedNode.Text).DataEntries)
             {
                 //create for every entry a new row and add it to the table
                 DataGridViewRow row = new DataGridViewRow();
 
                 object[] entries = { dataentry.Guid, dataentry.Application, dataentry.UserName, Encrypt.Text(dataentry.Password,this.tempPassword), dataentry.Category, dataentry.Url, dataentry.LastChanged};
                 
-                row.CreateCells(this.dataGridView1, entries);
+                row.CreateCells(this.dataGridView_dataTable, entries);
 
-                this.dataGridView1.Rows.Add(row);
+                this.dataGridView_dataTable.Rows.Add(row);
             }
         }
 
@@ -99,7 +99,7 @@ namespace KeySafe.UserControls
         /// </summary>
         private void RefreshTable()
         {
-            this.dataGridView1.Rows.Clear();
+            this.dataGridView_dataTable.Rows.Clear();
             FillTable();
         }
 
@@ -114,7 +114,7 @@ namespace KeySafe.UserControls
             if (e.Button == MouseButtons.Right)
             {
                 //if the table is empty the user only can add an entry
-                if (this.dataGridView1.Rows.Count <= 0)
+                if (this.dataGridView_dataTable.Rows.Count <= 0)
                 {
                     //disable all functions of the contextmenu except add-function
                     foreach (ToolStripItem item in this.contextMenuStrip_table.Items)
@@ -145,12 +145,12 @@ namespace KeySafe.UserControls
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Dataentry entry = new Dataentry();
-            entry.Guid = this.selectedRow.Cells[this.dataGridView1.Columns[column_Id.Name].Index].Value.ToString();
-            entry.Application = this.selectedRow.Cells[this.dataGridView1.Columns[column_Application.Name].Index].Value.ToString();
-            entry.UserName = this.selectedRow.Cells[this.dataGridView1.Columns[column_Username.Name].Index].Value.ToString();
-            entry.Password = Decrypt.Text(this.selectedRow.Cells[this.dataGridView1.Columns[column_Password.Name].Index].Value.ToString(), this.tempPassword);
-            entry.Category = this.selectedRow.Cells[this.dataGridView1.Columns[column_Category.Name].Index].Value.ToString();
-            entry.Url = this.selectedRow.Cells[this.dataGridView1.Columns[column_Url.Name].Index].Value.ToString();
+            entry.Guid = this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Id.Name].Index].Value.ToString();
+            entry.Application = this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Application.Name].Index].Value.ToString();
+            entry.UserName = this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Username.Name].Index].Value.ToString();
+            entry.Password = Decrypt.Text(this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Password.Name].Index].Value.ToString(), this.tempPassword);
+            entry.Category = this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Category.Name].Index].Value.ToString();
+            entry.Url = this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Url.Name].Index].Value.ToString();
 
             EditEntry(entry);
         }
@@ -192,8 +192,8 @@ namespace KeySafe.UserControls
         /// <param name="e"></param>
         private void removeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Folder selectedFolder = GetFolderByName(this.treeView1.SelectedNode.Text);
-            Dataentry selectedEntry = GetDataentryFromGuid(this.selectedRow.Cells[this.dataGridView1.Columns[column_Id.Name.ToString()].Index].Value.ToString());
+            Folder selectedFolder = GetFolderByName(this.treeView_folderExplorer.SelectedNode.Text);
+            Dataentry selectedEntry = GetDataentryFromGuid(this.selectedRow.Cells[this.dataGridView_dataTable.Columns[column_Id.Name.ToString()].Index].Value.ToString());
             selectedFolder.DataEntries.Remove(selectedEntry);
             RefreshTable();
             OnKeySafeFileChanged();
@@ -212,9 +212,9 @@ namespace KeySafe.UserControls
             {
                 if (this.selectedCell == null)
                 {
-                    if (e.ColumnIndex == this.dataGridView1.Columns[column_Password.Name.ToString()].Index)
+                    if (e.ColumnIndex == this.dataGridView_dataTable.Columns[column_Password.Name.ToString()].Index)
                     {
-                        this.selectedCell = this.dataGridView1[e.ColumnIndex, e.RowIndex];
+                        this.selectedCell = this.dataGridView_dataTable[e.ColumnIndex, e.RowIndex];
                         this.selectedCell.Value = Decrypt.Text(this.selectedCell.Value.ToString(), this.tempPassword);
                     }
                 }
@@ -222,7 +222,7 @@ namespace KeySafe.UserControls
             //If the cell is selected with the right mousebutton and its not the header row
             else if (e.Button == MouseButtons.Right)
             {
-                if (this.dataGridView1.Rows.Count > 0 && e.RowIndex >= 0)
+                if (this.dataGridView_dataTable.Rows.Count > 0 && e.RowIndex >= 0)
                 {
                     foreach (ToolStripItem item in this.contextMenuStrip_table.Items)
                     {
@@ -230,8 +230,8 @@ namespace KeySafe.UserControls
                     }
                     //store the selected row and show the context menu
                     this.selectedRow = new DataGridViewRow();
-                    this.selectedRow.CreateCells(this.dataGridView1);
-                    this.selectedRow = this.dataGridView1.Rows[e.RowIndex];
+                    this.selectedRow.CreateCells(this.dataGridView_dataTable);
+                    this.selectedRow = this.dataGridView_dataTable.Rows[e.RowIndex];
                     this.contextMenuStrip_table.Show(this, e.Location);
                 }
             }
@@ -263,7 +263,7 @@ namespace KeySafe.UserControls
         {
             foreach (Folder folder in this.file.Folder)
             {
-                this.treeView1.Nodes.Add(folder.Name);
+                this.treeView_folderExplorer.Nodes.Add(folder.Name);
             }
         }
 
@@ -273,10 +273,10 @@ namespace KeySafe.UserControls
         /// </summary>
         private void RefreshTreeView()
         {
-            TreeNode tempNode = this.treeView1.SelectedNode;
-            this.treeView1.Nodes.Clear();
+            TreeNode tempNode = this.treeView_folderExplorer.SelectedNode;
+            this.treeView_folderExplorer.Nodes.Clear();
             FillTreeView();
-            this.treeView1.SelectedNode = tempNode;
+            this.treeView_folderExplorer.SelectedNode = tempNode;
         }
         #endregion
 
@@ -289,12 +289,12 @@ namespace KeySafe.UserControls
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             //Select the node that is clicked
-            this.treeView1.SelectedNode = e.Node;
+            this.treeView_folderExplorer.SelectedNode = e.Node;
 
             //if the button is right mousebutton show the context menu
             if (e.Button == MouseButtons.Right)
             {
-                this.contextMenuStrip_node.Show(this.treeView1, e.Location);
+                this.contextMenuStrip_node.Show(this.treeView_folderExplorer, e.Location);
             }
             else
             {
@@ -331,13 +331,13 @@ namespace KeySafe.UserControls
         {
             FolderForm renameFolderForm = new FolderForm();
 
-            renameFolderForm.FolderName = this.treeView1.SelectedNode.Text;
+            renameFolderForm.FolderName = this.treeView_folderExplorer.SelectedNode.Text;
 
             DialogResult dr = renameFolderForm.ShowDialog(this);
 
             if (dr == DialogResult.OK)
             {
-                GetFolderByName(this.treeView1.SelectedNode.Text).Name = renameFolderForm.FolderName;
+                GetFolderByName(this.treeView_folderExplorer.SelectedNode.Text).Name = renameFolderForm.FolderName;
 
                 OnKeySafeFileChanged();
                 RefreshTreeView();
@@ -352,11 +352,11 @@ namespace KeySafe.UserControls
         /// <param name="e"></param>
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string message = $"Do you realy want to delete folder: {this.treeView1.SelectedNode.Text}?\nAll data in this folder will be deleted and can not be get back!";
+            string message = $"Do you realy want to delete folder: {this.treeView_folderExplorer.SelectedNode.Text}?\nAll data in this folder will be deleted and can not be get back!";
             DialogResult dr = MessageBox.Show(this,message,"Warning",MessageBoxButtons.YesNo,MessageBoxIcon.Asterisk);
             if (dr == DialogResult.Yes)
             {
-                this.file.Folder.Remove(GetFolderByName(this.treeView1.SelectedNode.Text));
+                this.file.Folder.Remove(GetFolderByName(this.treeView_folderExplorer.SelectedNode.Text));
                 RefreshTreeView();
             }
         }
@@ -436,7 +436,7 @@ namespace KeySafe.UserControls
         private void AddEntry()
         {
             Form_DataEntry createDataEntry = new Form_DataEntry(this.file.Folder);
-            createDataEntry.ParentFolder = this.treeView1.SelectedNode.Text;
+            createDataEntry.ParentFolder = this.treeView_folderExplorer.SelectedNode.Text;
             DialogResult dr = createDataEntry.ShowDialog(this);
             if (dr == DialogResult.OK)
             {
@@ -445,7 +445,7 @@ namespace KeySafe.UserControls
                 parentFolder.DataEntries.Add(entry);
                 OnKeySafeFileChanged();
                 //if the folder name is same as selected and showen folder the tabel will refresh
-                if (parentFolder.Name.Equals(this.treeView1.SelectedNode.Text))
+                if (parentFolder.Name.Equals(this.treeView_folderExplorer.SelectedNode.Text))
                 {
                     RefreshTable();
                 }
@@ -461,7 +461,7 @@ namespace KeySafe.UserControls
         {
             Form_DataEntry createDataEntryForm = new Form_DataEntry(this.file.Folder, entry);
 
-            createDataEntryForm.ParentFolder = this.treeView1.SelectedNode.Text;
+            createDataEntryForm.ParentFolder = this.treeView_folderExplorer.SelectedNode.Text;
 
             DialogResult dr = createDataEntryForm.ShowDialog(this);
 
@@ -478,9 +478,9 @@ namespace KeySafe.UserControls
                 changedDataentry.LastChanged = createDataEntryForm.Entry.LastChanged;
 
                 //If the parentfolder did not changed just the properties will be changed
-                if (!createDataEntryForm.ParentFolder.Equals(this.treeView1.SelectedNode.Text))
+                if (!createDataEntryForm.ParentFolder.Equals(this.treeView_folderExplorer.SelectedNode.Text))
                 {
-                    GetFolderByName(this.treeView1.SelectedNode.Text).DataEntries.Remove(GetDataentryFromGuid(createDataEntryForm.Entry.Guid));
+                    GetFolderByName(this.treeView_folderExplorer.SelectedNode.Text).DataEntries.Remove(GetDataentryFromGuid(createDataEntryForm.Entry.Guid));
                     newParentFolder.DataEntries.Add(createDataEntryForm.Entry);
                 }
                 OnKeySafeFileChanged();
@@ -499,6 +499,13 @@ namespace KeySafe.UserControls
                 }
             }
             return null;
+        }
+
+        public delegate void OnLogoutRequestDeligate();
+        public event OnLogoutRequestDeligate OnLogoutRequest;
+        private void button_logout_Click(object sender, EventArgs e)
+        {
+            OnLogoutRequest();
         }
     }
 }
